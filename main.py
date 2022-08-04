@@ -5,9 +5,9 @@ from gmail import GMail, Message
 from decouple import config
 
 
-workbook_folder = "D:\\"
-data_folder = "D:\\term_results"
-workbook_name = "spring 2022 results to be sent to.xlsx"
+workbook_folder = config('WORKING_FOLDER')
+data_folder = config('DATA_FOLDER')
+workbook_name = config('WB_NAME')
 workbook_path = os.path.join(workbook_folder, workbook_name)
 workbook = openpyxl.load_workbook(workbook_path)
 
@@ -91,5 +91,6 @@ if __name__ == "__main__":
                             data_folder, cell.value)
 
             if student.name and student.paid:
+                # print(student.name, student.id, student.email)
                 send_gmail(mail, student, **mail_property)
     print("==> Done!")
