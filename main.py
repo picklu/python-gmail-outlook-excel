@@ -18,10 +18,10 @@ class Student:
         self.department = department
         self.id = None
         self.name = None
-        self.file_path = None
         self.email = None
         self.mobile = None
         self.paid = False
+        self.file_path = None
 
     def __repr__(self) -> str:
         return f"__{self.name}({self.id}) of {self.department}"
@@ -75,17 +75,17 @@ if __name__ == "__main__":
                         student.id = cell.value
                     case "Name":
                         student.name = cell.value
-                    case "file name":
-                        student.file_path = os.path.join(
-                            data_folder, cell.value)
                     case "email":
                         student.email = cell.value
                     case "Mobile":
                         student.mobile = cell.value
                     case "Paid":
                         student.paid = cell.value
+                    case "file name":
+                        student.file_path = os.path.join(
+                            data_folder, cell.value)
 
             if student.name and student.paid:
-                mail_property["to"] = "picklumithu@gmail.com"
+                mail_property["to"] = student.email
                 send_gmail(mail, student, **mail_property)
     print("==> Done!")
