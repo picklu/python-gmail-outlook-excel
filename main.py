@@ -35,7 +35,8 @@ def send_gmail(mail, student, **mail_property):
     mail_property["to"] = student.email
     mail_property["html"] = f"""
     Dear {student.name},<br><br>
-    Please find attahced herewith your final result for Spring 2022.
+    The final results for Spring 2022 is available now.<br>
+    Please find attahced herewith your result.
     <br><br>
     All the best.
     <br><br>
@@ -54,14 +55,16 @@ def send_gmail(mail, student, **mail_property):
 
 
 if __name__ == "__main__":
-    ws_names = ["CSE", "English"]
-    mail_property = {}
+
     mail = GMail(
         f"Dr. Subrata Sarker<{config('EMAIL_ID')}>", config('PASSWORD'))
+
+    mail_property = {}
     mail_property["subject"] = 'Final result for Spring 2022'
     mail_property["cc"] = config('CC_MAIL_ID')
     mail_property["text"] = "Final result for Spring 2020 is availabe now"
 
+    ws_names = ["CSE", "English"]
     for ws_name in ws_names:
         ws = workbook[ws_name]
 
