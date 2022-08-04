@@ -32,6 +32,7 @@ def send_gmail(mail, student, **mail_property):
     to avoid any error sending Gmail
     """
 
+    # dynamic property
     mail_property["to"] = student.email
     mail_property["html"] = f"""
     Dear {student.name},<br><br>
@@ -60,6 +61,7 @@ if __name__ == "__main__":
         f"Dr. Subrata Sarker<{config('EMAIL_ID')}>", config('PASSWORD'))
 
     mail_property = {}
+    # fixed property
     mail_property["subject"] = 'Final result for Spring 2022'
     mail_property["cc"] = config('CC_MAIL_ID')
     mail_property["text"] = "Final result for Spring 2020 is availabe now"
