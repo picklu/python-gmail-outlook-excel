@@ -70,18 +70,20 @@ if __name__ == "__main__":
             student = Student(ws_name)
 
             for cell in row:
-                if ws.cell(1, cell.column).value == "Student Id":
-                    student.id = cell.value
-                if ws.cell(1, cell.column).value == "Name":
-                    student.name = cell.value
-                if ws.cell(1, cell.column).value == "file name":
-                    student.file_path = os.path.join(data_folder, cell.value)
-                if ws.cell(1, cell.column).value == "email":
-                    student.email = cell.value
-                if ws.cell(1, cell.column).value == "Mobile":
-                    student.mobile = cell.value
-                if ws.cell(1, cell.column).value == "Paid":
-                    student.paid = cell.value
+                match ws.cell(1, cell.column).value:
+                    case "Student Id":
+                        student.id = cell.value
+                    case "Name":
+                        student.name = cell.value
+                    case "file name":
+                        student.file_path = os.path.join(
+                            data_folder, cell.value)
+                    case "email":
+                        student.email = cell.value
+                    case "Mobile":
+                        student.mobile = cell.value
+                    case "Paid":
+                        student.paid = cell.value
 
             if student.name and student.paid:
                 mail_property["to"] = "picklumithu@gmail.com"
