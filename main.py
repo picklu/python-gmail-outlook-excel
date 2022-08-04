@@ -5,11 +5,11 @@ from gmail import GMail, Message
 from decouple import config
 
 
-workbook_folder = config('WORKING_FOLDER')
-data_folder = config('DATA_FOLDER')
-workbook_name = config('WB_NAME')
-workbook_path = os.path.join(workbook_folder, workbook_name)
-workbook = openpyxl.load_workbook(workbook_path)
+wb_folder = config('WORKING_FOLDER')
+dt_folder = config('DATA_FOLDER')
+wb_name = config('WB_NAME')
+wb_path = os.path.join(wb_folder, wb_name)
+workbook = openpyxl.load_workbook(wb_path)
 
 
 class Student:
@@ -88,7 +88,7 @@ if __name__ == "__main__":
                         student.paid = cell.value
                     case "file name":
                         student.file_path = os.path.join(
-                            data_folder, cell.value)
+                            dt_folder, cell.value)
 
             if student.name and student.paid:
                 # print(student.name, student.id, student.email)
