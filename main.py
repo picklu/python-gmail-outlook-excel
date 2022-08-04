@@ -42,6 +42,7 @@ def send_gmail(mail, student, **mail_property):
     Dr. Subrata Sarker<br>
     Registrar<br>
     University of Skill Enrichment and Technology<br>
+    Signboard Circle, Narayanganj, Dhaka, Bangladesh<br>
     e-mail: ss.rgstr.uset.edu@gmail.com<br>
     Dispatched at {datetime.now().strftime("%d %B %Y, %H:%M:%S %p")}
     """
