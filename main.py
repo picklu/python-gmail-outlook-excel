@@ -32,6 +32,7 @@ def send_gmail(mail, student, **mail_property):
     to avoid any error sending Gmail
     """
 
+    mail_property["to"] = student.email
     mail_property["html"] = f"""
     Dear {student.name},<br><br>
     Please find attahced herewith your final result for Spring 2022.
@@ -48,7 +49,7 @@ def send_gmail(mail, student, **mail_property):
     msg = Message(**mail_property)
     mail.send(msg)
 
-    print("==>", "mail sent to", student.name, "successfully!")
+    print("==>", "Mail sent to", student.name, "successfully!")
 
 
 if __name__ == "__main__":
@@ -86,6 +87,5 @@ if __name__ == "__main__":
                             data_folder, cell.value)
 
             if student.name and student.paid:
-                mail_property["to"] = student.email
                 send_gmail(mail, student, **mail_property)
     print("==> Done!")
