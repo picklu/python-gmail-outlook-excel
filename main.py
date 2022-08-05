@@ -21,7 +21,7 @@ class Student:
         self.name = None
         self.email = None
         self.mobile = None
-        self.paid = False
+        self.paid = None
         self.file_path = None
 
     def __repr__(self) -> str:
