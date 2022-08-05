@@ -34,22 +34,21 @@ def send_gmail(mail, student):
     """
 
     mail_property = {}
-    mail_property["subject"] = f"Final result for Spring 2022"
+    mail_property["subject"] = "Subject of the mail goes here"
     mail_property["to"] = student.email
     mail_property["cc"] = config('CC_MAIL_ID')
-    mail_property["text"] = "Final result for Spring 2020 is availabe now"
+    mail_property["text"] = "Body of the mail goes here"
     mail_property["html"] = f"""
     Dear {student.name},<br><br>
-    The final results for Spring 2022 is available now.<br>
-    Please find attahced herewith your result.
+    Body of the mail goes here
+    and here...
     <br><br>
     All the best.
     <br><br>
-    Dr. Subrata Sarker<br>
-    Registrar<br>
-    University of Skill Enrichment and Technology<br>
-    Signboard Circle, Narayanganj, Dhaka, Bangladesh<br>
-    e-mail: ss.rgstr.uset.edu@gmail.com<br>
+    Sender Name
+    Designation
+    Istitution
+    Address of the Institution
     Dispatched at {datetime.now().strftime("%d %B %Y, %H:%M:%S %p")}
     """
     mail_property["attachments"] = [student.file_path]
