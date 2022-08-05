@@ -1,8 +1,9 @@
 import os
 import openpyxl
+
 from datetime import datetime
-from gmail import GMail, Message
 from decouple import config
+from gmail import GMail, Message
 
 
 wb_folder = config('WORKING_FOLDER')
