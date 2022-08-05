@@ -37,7 +37,7 @@ def send_gmail(mail, student):
     mail_property["subject"] = f"Final result for Spring 2022"
     mail_property["to"] = student.email
     mail_property["cc"] = config('CC_MAIL_ID')
-    mail_property["text"] = "Final result for Spring 2020 is availabe now"
+    mail_property["text"] = "Body of the mail"
     mail_property["html"] = f"""
     Dear {student.name},<br><br>
     The final results for Spring 2022 is available now.<br>
@@ -56,8 +56,7 @@ def send_gmail(mail, student):
     msg = Message(**mail_property)
     mail.send(msg)
 
-    print(
-        f"==> Mail sent to {student.name}({student.id}) of {student.department} successfully!")
+    print(f"==> Mail sent to {student.name}<{student.email}> [{student.id}]")
 
 
 if __name__ == "__main__":
@@ -86,12 +85,16 @@ if __name__ == "__main__":
                     case "mobile":
                         student.mobile = cell.value
                     case "paid":
-                        student.paid = cell.value
+                        student.paid = cell.value == "Paid"
                     case "file name":
                         student.file_path = os.path.join(
                             dt_folder, cell.value)
 
             if student.name and student.paid:
-                # print(student.name, student.id, student.email)
+                print(
+                    f"==> Mail to be sent to {student.name}<{student.email}> [{student.id}]")
                 send_gmail(mail, student)
+            else:
+                print(
+                    f"==O Mail not to be sent to {student.name}<{student.email}> [{student.id}]")
     print("==> Done!")
