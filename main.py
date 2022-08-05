@@ -28,13 +28,16 @@ class Student:
         return f"__{self.name}({self.id}) of {self.department}"
 
 
-def send_gmail(mail, student, **mail_property):
+def send_gmail(mail, student):
     """Send email using gmail. Use your App Password 
     to avoid any error sending Gmail
     """
 
-    # dynamic property
+    mail_property = {}
+    mail_property["subject"] = f"Final result for Spring 2022"
     mail_property["to"] = student.email
+    mail_property["cc"] = config('CC_MAIL_ID')
+    mail_property["text"] = "Final result for Spring 2020 is availabe now"
     mail_property["html"] = f"""
     Dear {student.name},<br><br>
     The final results for Spring 2022 is available now.<br>
@@ -61,12 +64,6 @@ if __name__ == "__main__":
 
     mail = GMail(
         f"Dr. Subrata Sarker<{config('EMAIL_ID')}>", config('PASSWORD'))
-
-    mail_property = {}
-    # fixed property
-    mail_property["subject"] = 'Final result for Spring 2022'
-    mail_property["cc"] = config('CC_MAIL_ID')
-    mail_property["text"] = "Final result for Spring 2020 is availabe now"
 
     ws_names = ["CSE", "English"]
     for ws_name in ws_names:
@@ -96,5 +93,5 @@ if __name__ == "__main__":
 
             if student.name and student.paid:
                 # print(student.name, student.id, student.email)
-                send_gmail(mail, student, **mail_property)
+                send_gmail(mail, student)
     print("==> Done!")
