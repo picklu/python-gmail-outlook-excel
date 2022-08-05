@@ -52,7 +52,8 @@ def send_gmail(mail, student, **mail_property):
     msg = Message(**mail_property)
     mail.send(msg)
 
-    print("==>", "Mail sent to", student.name, "successfully!")
+    print(
+        f"==> Mail sent to {student.name}({student.id}) of {student.department} successfully!")
 
 
 if __name__ == "__main__":
@@ -77,16 +78,16 @@ if __name__ == "__main__":
             student = Student(ws_name)
 
             for cell in row:
-                match ws.cell(1, cell.column).value:
-                    case "Student Id":
+                match ws.cell(1, cell.column).value.lower():
+                    case "student id":
                         student.id = cell.value
-                    case "Name":
+                    case "name":
                         student.name = cell.value
                     case "email":
                         student.email = cell.value
-                    case "Mobile":
+                    case "mobile":
                         student.mobile = cell.value
-                    case "Paid":
+                    case "paid":
                         student.paid = cell.value
                     case "file name":
                         student.file_path = os.path.join(
