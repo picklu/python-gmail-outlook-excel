@@ -41,7 +41,7 @@ def send_gmail(mail, student):
     mail_property["html"] = f"""
     Dear {student.name},<br><br>
     The final results for Spring 2022 is available now.<br>
-    Please find attahced herewith your result.
+    Please find attached herewith your result.
     <br><br>
     All the best.
     <br><br>
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     mail = GMail(
         f"Dr. Subrata Sarker<{config('EMAIL_ID')}>", config('PASSWORD'))
 
-    ws_names = ["CSE", "English"]
+    ws_names = ["Economics"]
     for ws_name in ws_names:
         ws = workbook[ws_name]
 
