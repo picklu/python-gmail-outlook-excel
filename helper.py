@@ -51,10 +51,7 @@ def email_content(recipient):
         ).strftime("%d %B %Y, %H:%M:%S %p")
     }
 
-    try:
-        tmpl = open("template.html", "r").read()
-        content = Template(tmpl)
-    except:
-        content = Template("")
-    finally:
-        return content.substitute(replaceables)
+    with open("template.html", "r") as f:
+        content = f.read()
+
+    return Template(content).substitute(replaceables)
