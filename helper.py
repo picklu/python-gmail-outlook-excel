@@ -39,6 +39,31 @@ class Student:
         return f"__{self.name}({self.id}) of {self.department}"
 
 
+def update_student(student, ws, row):
+    """Update student object with information from row of ws
+
+    Args:
+        student (Student): instance of Student
+        ws (Worksheet): worksheet of a workbook
+        row (row): row of a worksheet
+    """
+    for cell in row:
+        match ws.cell(1, cell.column).value.lower():
+            case "student id":
+                student.id = cell.value
+            case "name":
+                student.name = cell.value
+            case "email":
+                student.email = cell.value
+            case "mobile":
+                student.mobile = cell.value
+            case "paid":
+                student.paid = cell.value == "Paid"
+            case "file name":
+                student.file_path = os.path.join(
+                    dt_folder, cell.value)
+
+
 def email_content(recipient):
     """Return content of an email for a recipient.
 

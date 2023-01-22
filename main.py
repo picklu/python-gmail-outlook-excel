@@ -3,8 +3,8 @@ import os
 from gmail import GMail, Message
 
 from helper import (dt_folder, workbook, Student,
-                    from_email, email_pass, cc_email,
-                    email_content)
+                    update_student, from_email, email_pass,
+                    cc_email, email_content)
 
 
 def send_gmail(mail, student):
@@ -29,12 +29,16 @@ def send_gmail(mail, student):
     print(f"==> Mail sent to {student.name}<{student.email}> [{student.id}]")
 
 
-if __name__ == "__main__":
+def get_students(ws_names):
+    """returns students with information from worksheets
 
-    mail = GMail(
-        f"Dr. Subrata Sarker<{from_email}>", email_pass)
+    Args:
+        ws_names (list): list of worksheet names
 
-    ws_names = ["TEST"]
+    Returns:
+        list: list of students of type Student
+    """
+    students = []
     for ws_name in ws_names:
         ws = workbook[ws_name]
 
@@ -43,28 +47,25 @@ if __name__ == "__main__":
                 continue
 
             student = Student(ws_name)
+            update_student(student, ws, row)
+            students.append(student)
+    return students
 
-            for cell in row:
-                match ws.cell(1, cell.column).value.lower():
-                    case "student id":
-                        student.id = cell.value
-                    case "name":
-                        student.name = cell.value
-                    case "email":
-                        student.email = cell.value
-                    case "mobile":
-                        student.mobile = cell.value
-                    case "paid":
-                        student.paid = cell.value == "Paid"
-                    case "file name":
-                        student.file_path = os.path.join(
-                            dt_folder, cell.value)
 
-            if student.name and student.paid:
-                print(
-                    f"==> Mail to be sent to {student.name}<{student.email}> [{student.id}]")
-                send_gmail(mail, student)
-            else:
-                print(
-                    f"==O Mail not to be sent to {student.name}<{student.email}> [{student.id}]")
+if __name__ == "__main__":
+
+    mail = GMail(
+        f"Dr. Subrata Sarker<{from_email}>", email_pass)
+
+    ws_names = ["TEST"]
+
+    students = get_students(ws_names)
+    for student in students:
+        if student.name and student.paid:
+            print(
+                f"==> Mail to be sent to {student.name}<{student.email}> [{student.id}]")
+            send_gmail(mail, student)
+        else:
+            print(
+                f"==O Mail not to be sent to {student.name}<{student.email}> [{student.id}]")
     print("==> Done!")
