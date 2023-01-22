@@ -4,7 +4,7 @@ from gmail import GMail, Message
 
 from helper import (dt_folder, workbook, Student,
                     update_student, from_email, email_pass,
-                    cc_email, email_content)
+                    from_name, cc_email, email_content)
 
 
 def send_gmail(mail, student):
@@ -55,7 +55,7 @@ def get_students(ws_names):
 if __name__ == "__main__":
 
     mail = GMail(
-        f"Dr. Subrata Sarker<{from_email}>", email_pass)
+        f"{from_name}<{from_email}>", email_pass)
 
     ws_names = ["TEST"]
 

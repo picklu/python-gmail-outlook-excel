@@ -12,6 +12,7 @@ wb_name = config('WB_NAME')
 wb_path = os.path.join(wb_folder, wb_name)
 workbook = openpyxl.load_workbook(wb_path)
 
+from_name = config("FROM_NAME")
 from_email = config('EMAIL_ID')
 email_pass = config('EMAIL_PASSWORD')
 cc_email = config('CC_MAIL_ID')
